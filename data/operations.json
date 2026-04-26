@@ -5,7 +5,7 @@
     {
       "name": "營運公告",
       "badge": "Announcements",
-      "links": [{"title": "📢 營運公告", "url": "/zh-tw/01-operations/announcements"}]
+      "links": [{"title": "📢 營運公告", "url": "https://wiki-js.mis4o.com/zh-tw/01-operations/announcements"}]
     },
     {
       "name": "教育訓練",
