@@ -247,8 +247,8 @@
       ops.categories.forEach(cat => {
         const icon = ICONS[cat.badge] || '📁';
         const links = cat.links.map(l =>
-          `<li><a href="${l.url}">${l.title}</a></li>`
-        ).join('');
+          `<li><a href="${l.url}" target="_top">${l.title}</a></li>`
+       ).join('');
 
         const card = document.createElement('div');
         card.className = 'card';
