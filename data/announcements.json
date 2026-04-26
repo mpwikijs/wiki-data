@@ -1,0 +1,24 @@
+{
+  "announcements": [
+    {
+      "type": "urgent",
+      "tag": "重要通知",
+      "tagClass": "tag-notice",
+      "date": "2026/04/26",
+      "author": "Paul",
+      "title": "📢 2026 年度行政行事曆",
+      "summary": "紀念日及節日之放假日調整公告，請各單位配合辦理。",
+      "url": "https://www.dgpa.gov.tw"
+    },
+    {
+      "type": "new",
+      "tag": "政策更新",
+      "tagClass": "tag-policy",
+      "date": "2026/04/26",
+      "author": "管理部",
+      "title": "新版差旅與公出報支規範",
+      "summary": "全面改為電子化掃描上傳系統，紙本收據不再受理。",
+      "url": "https://expense.mis4o.com"
+    }
+  ]
+}
