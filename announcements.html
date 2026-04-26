@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>營運公告</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Noto Sans TC', 'Microsoft JhengHei', sans-serif;
+    background: #f0f2f5;
+    color: #2c3e50;
+  }
+
+  .container {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 28px 20px 48px;
+  }
+
+  .page-header {
+    display: flex;
+    align-items: flex-end;
+    gap: 16px;
+    margin-bottom: 28px;
+    padding-bottom: 16px;
+    border-bottom: 3px solid #2980b9;
+  }
+  .page-header h1 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #1a252f;
+    line-height: 1.2;
+  }
+  .page-header p {
+    font-size: 0.85rem;
+    color: #7f8c8d;
+    padding-bottom: 2px;
+  }
+
+  /* Tag styles */
+  .tag {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    margin-right: 8px;
+    letter-spacing: 0.02em;
+  }
+  .tag-notice  { background: #fff3cd; color: #856404; }
+  .tag-policy  { background: #d1ecf1; color: #0c5460; }
+  .tag-event   { background: #d4edda; color: #155724; }
+  .tag-hr      { background: #e2d9f3; color: #4a2c7a; }
+  .tag-it      { background: #dde8fb; color: #1a4a9a; }
+
+  /* Announcement card */
+  .announcement-item {
+    background: white;
+    border-radius: 10px;
+    padding: 20px 22px;
+    margin-bottom: 16px;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.06);
+    border-left: 5px solid #bdc3c7;
+    transition: box-shadow 0.2s, transform 0.2s;
+    position: relative;
+  }
+  .announcement-item:hover {
+    box-shadow: 0 4px 16px rgba(0,0,0,0.10);
+    transform: translateY(-2px);
+  }
+  .announcement-item.urgent {
+    border-left-color: #e74c3c;
+    background: #fffafa;
+  }
+  .announcement-item.new {
+    border-left-color: #2980b9;
+  }
+  .announcement-item.event {
+    border-left-color: #27ae60;
+  }
+  .announcement-item.hr {
+    border-left-color: #8e44ad;
+  }
+
+  /* NEW badge */
+  .new-dot {
+    position: absolute;
+    top: 18px; right: 18px;
+    background: #e74c3c;
+    color: white;
+    font-size: 0.65rem;
+    font-weight: 700;
+    padding: 2px 7px;
+    border-radius: 20px;
+    letter-spacing: 0.05em;
+  }
+
+  .item-meta {
+    font-size: 0.8rem;
+    color: #95a5a6;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+  .item-meta .dot { color: #ddd; margin: 0 2px; }
+
+  .item-title {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #1a252f;
+    margin-bottom: 8px;
+    line-height: 1.4;
+  }
+  .item-title a {
+    text-decoration: none;
+    color: inherit;
+    transition: color 0.15s;
+  }
+  .item-title a:hover { color: #2980b9; }
+
+  .item-summary {
+    font-size: 0.88rem;
+    color: #555;
+    line-height: 1.7;
+  }
+
+  /* Empty / Loading / Error */
+  .state-box {
+    background: white;
+    border-radius: 10px;
+    padding: 48px 20px;
+    text-align: center;
+    color: #95a5a6;
+    font-size: 0.9rem;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.06);
+  }
+  .spinner {
+    width: 32px; height: 32px;
+    border: 3px solid #eee;
+    border-top-color: #2980b9;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    margin: 0 auto 14px;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .error-state {
+    background: #fff5f5;
+    border: 1px solid #fed7d7;
+    border-radius: 8px;
+    padding: 20px;
+    color: #c53030;
+    text-align: center;
+  }
+
+  /* Count badge */
+  .count-badge {
+    display: inline-block;
+    background: #2980b9;
+    color: white;
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 2px 9px;
+    border-radius: 20px;
+    margin-left: 10px;
+    vertical-align: middle;
+  }
+
+  @media (max-width: 600px) {
+    .page-header { flex-direction: column; align-items: flex-start; gap: 4px; }
+    .page-header h1 { font-size: 1.2rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <div class="page-header">
+    <div>
+      <h1>📢 營運公告 <span id="count-badge" class="count-badge" style="display:none;"></span></h1>
+      <p>發佈公司行政規範、活動通知與重要政策變更</p>
+    </div>
+  </div>
+
+  <div id="announcements-list">
+    <div class="state-box">
+      <div class="spinner"></div>
+      載入公告中...
+    </div>
+  </div>
+</div>
+
+<script>
+  // ★ 請將下方網址改成你的 GitHub Pages 路徑
+  const DATA_URL = 'https://mpwikijs.github.io/wiki-data/data/announcements.json';
+
+  // 是否為7天內的公告（顯示 NEW 標記）
+  function isRecent(dateStr) {
+    try {
+      const d = new Date(dateStr.replace(/\//g, '-'));
+      return (Date.now() - d.getTime()) < 7 * 24 * 60 * 60 * 1000;
+    } catch { return false; }
+  }
+
+  fetch(DATA_URL)
+    .then(r => {
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      return r.json();
+    })
+    .then(data => {
+      const list = document.getElementById('announcements-list');
+      const items = data.announcements;
+
+      if (!items || items.length === 0) {
+        list.innerHTML = '<div class="state-box">目前沒有任何公告。</div>';
+        return;
+      }
+
+      // 顯示公告數量
+      const badge = document.getElementById('count-badge');
+      badge.style.display = 'inline-block';
+      badge.textContent = items.length + ' 則';
+
+      list.innerHTML = '';
+      items.forEach(item => {
+        const div = document.createElement('div');
+        div.className = 'announcement-item ' + (item.type || '');
+
+        const showNew = isRecent(item.date);
+        const newDot = showNew ? '<span class="new-dot">NEW</span>' : '';
+
+        div.innerHTML = `
+          ${newDot}
+          <div class="item-meta">
+            <span class="tag ${item.tagClass || ''}">${item.tag}</span>
+            <span>${item.date}</span>
+            <span class="dot">•</span>
+            <span>發佈人：${item.author}</span>
+          </div>
+          <div class="item-title">
+            <a href="${item.url}" target="_blank" rel="noopener">${item.title}</a>
+          </div>
+          <div class="item-summary">${item.summary}</div>`;
+
+        list.appendChild(div);
+      });
+    })
+    .catch(err => {
+      document.getElementById('announcements-list').innerHTML =
+        `<div class="error-state">⚠️ 公告資料載入失敗，請稍後重試。<br><small style="opacity:0.7;">${err.message}</small></div>`;
+    });
+</script>
+</body>
+</html>
