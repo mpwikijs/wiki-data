@@ -5,7 +5,7 @@
     {
       "name": "營運公告",
       "badge": "Announcements",
-      "links": [{"title": "📢 2026 年度行政行事曆", "url": "/01-operations/announcements/announcements"}]
+      "links": [{"title": "📢 2026 年度行政行事曆", "url": "./01-operations/announcements"}]
     },
     {
       "name": "教育訓練",
