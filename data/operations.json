@@ -1,0 +1,26 @@
+{
+  "title": "01 營運管理 (Operations)",
+  "subtitle": "核心價值：人的規範、行政共識、教育傳承",
+  "categories": [
+    {
+      "name": "營運公告",
+      "badge": "Announcements",
+      "links": [{"title": "📢 2026 年度行政行事曆", "url": "/01-operations/announcements"}]
+    },
+    {
+      "name": "教育訓練",
+      "badge": "Training",
+      "links": [{"title": "📖 內部技術分享紀錄", "url": "#"}]
+    },
+    {
+      "name": "行政共識",
+      "badge": "Consensus",
+      "links": [{"title": "📜 差旅與公出報支規範", "url": "https://expense.mis4o.com"}]
+    },
+    {
+      "name": "員工福利",
+      "badge": "Resources",
+      "links": [{"title": "🎁 員工福利與健檢說明", "url": "#"}]
+    }
+  ]
+}
