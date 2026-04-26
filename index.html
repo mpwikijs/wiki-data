@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>01 營運管理</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Noto Sans TC', 'Microsoft JhengHei', sans-serif;
+    background: #f0f2f5;
+    color: #2c3e50;
+  }
+
+  .header-banner {
+    background: linear-gradient(135deg, #1a2a3a 0%, #2c3e50 60%, #1a3a4a 100%);
+    color: white;
+    padding: 36px 28px;
+    text-align: center;
+    border-bottom: 4px solid #16a085;
+    position: relative;
+    overflow: hidden;
+  }
+  .header-banner::before {
+    content: '';
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 180px; height: 180px;
+    border-radius: 50%;
+    background: rgba(22,160,133,0.12);
+  }
+  .header-banner::after {
+    content: '';
+    position: absolute;
+    bottom: -60px; left: -30px;
+    width: 220px; height: 220px;
+    border-radius: 50%;
+    background: rgba(22,160,133,0.08);
+  }
+  .header-banner h1 {
+    font-size: 1.7rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    position: relative; z-index: 1;
+  }
+  .header-banner p {
+    margin-top: 8px;
+    opacity: 0.8;
+    font-size: 0.92rem;
+    position: relative; z-index: 1;
+  }
+
+  .container {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 24px 20px 40px;
+  }
+
+  .breadcrumb {
+    font-size: 0.8rem;
+    color: #95a5a6;
+    margin-bottom: 20px;
+  }
+
+  .intro-card {
+    background: white;
+    border-radius: 10px;
+    padding: 20px 24px;
+    margin-bottom: 24px;
+    border-left: 5px solid #16a085;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.06);
+  }
+  .intro-card h2 {
+    font-size: 1rem;
+    color: #16a085;
+    margin-bottom: 8px;
+  }
+  .intro-card p {
+    font-size: 0.88rem;
+    color: #555;
+    line-height: 1.7;
+  }
+
+  .section-label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #95a5a6;
+    margin-bottom: 14px;
+  }
+
+  .category-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .card {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.06);
+    border: 1px solid #e8ecef;
+    transition: box-shadow 0.2s, transform 0.2s;
+  }
+  .card:hover {
+    box-shadow: 0 4px 16px rgba(0,0,0,0.10);
+    transform: translateY(-2px);
+  }
+
+  .card-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 14px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #f0f2f5;
+  }
+  .card-icon {
+    width: 36px; height: 36px;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #16a085, #1abc9c);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1rem;
+    flex-shrink: 0;
+  }
+  .card-title-wrap h3 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #2c3e50;
+  }
+  .badge {
+    display: inline-block;
+    background: #eafaf6;
+    color: #16a085;
+    padding: 1px 8px;
+    border-radius: 20px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    margin-top: 2px;
+  }
+
+  .link-list { list-style: none; }
+  .link-list li {
+    padding: 7px 0;
+    border-bottom: 1px dashed #eef0f2;
+    font-size: 0.85rem;
+  }
+  .link-list li:last-child { border-bottom: none; }
+  .link-list a {
+    color: #2980b9;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: color 0.15s;
+  }
+  .link-list a:hover { color: #16a085; }
+  .link-list a::before {
+    content: '›';
+    font-size: 1rem;
+    color: #bdc3c7;
+  }
+
+  .loading-state {
+    text-align: center;
+    padding: 60px 20px;
+    color: #95a5a6;
+    font-size: 0.9rem;
+  }
+  .spinner {
+    width: 32px; height: 32px;
+    border: 3px solid #eee;
+    border-top-color: #16a085;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    margin: 0 auto 12px;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .error-state {
+    background: #fff5f5;
+    border: 1px solid #fed7d7;
+    border-radius: 8px;
+    padding: 16px 20px;
+    color: #c53030;
+    font-size: 0.88rem;
+    text-align: center;
+  }
+
+  @media (max-width: 600px) {
+    .category-grid { grid-template-columns: 1fr; }
+    .header-banner h1 { font-size: 1.3rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header-banner">
+  <h1 id="main-title">01 營運管理</h1>
+  <p id="main-subtitle">載入中...</p>
+</div>
+
+<div class="container">
+  <div class="breadcrumb">🏠 首頁 / 01 營運管理</div>
+
+  <div class="intro-card">
+    <h2>目錄簡介</h2>
+    <p>本模組旨在建立團隊行政共識，提供最新公告事項及教育訓練資源，確保每一位成員皆能掌握公司規範並持續成長。</p>
+  </div>
+
+  <div class="section-label">功能分類</div>
+  <div id="dynamic-grid" class="category-grid">
+    <div class="loading-state">
+      <div class="spinner"></div>
+      載入中...
+    </div>
+  </div>
+</div>
+
+<script>
+  // ★ 請將下方網址改成你的 GitHub Pages 路徑
+  const DATA_URL = 'https://mpwikijs.github.io/wiki-data/data/operations.json';
+
+  // 每個分類的圖示對應
+  const ICONS = {
+    'Announcements': '📢',
+    'Training': '📖',
+    'Consensus': '📜',
+    'Resources': '🎁'
+  };
+
+  fetch(DATA_URL)
+    .then(r => {
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      return r.json();
+    })
+    .then(ops => {
+      document.getElementById('main-title').innerText = ops.title;
+      document.getElementById('main-subtitle').innerText = ops.subtitle;
+
+      const grid = document.getElementById('dynamic-grid');
+      grid.innerHTML = '';
+
+      ops.categories.forEach(cat => {
+        const icon = ICONS[cat.badge] || '📁';
+        const links = cat.links.map(l =>
+          `<li><a href="${l.url}">${l.title}</a></li>`
+        ).join('');
+
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.innerHTML = `
+          <div class="card-header">
+            <div class="card-icon">${icon}</div>
+            <div class="card-title-wrap">
+              <h3>${cat.name}</h3>
+              <span class="badge">${cat.badge}</span>
+            </div>
+          </div>
+          <ul class="link-list">${links}</ul>`;
+        grid.appendChild(card);
+      });
+    })
+    .catch(err => {
+      document.getElementById('dynamic-grid').innerHTML =
+        `<div class="error-state">⚠️ 資料載入失敗，請稍後重試。<br><small>${err.message}</small></div>`;
+    });
+</script>
+</body>
+</html>
