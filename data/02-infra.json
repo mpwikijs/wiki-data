@@ -1,0 +1,64 @@
+{
+    "title":  "02 基礎建設 (Infrastructure)",
+    "subtitle":  "技術文件及資源",
+    "categories":  [
+                       {
+                           "name":  "伺服器",
+                           "badge":  "Server",
+                           "links":  [
+                                         {
+                                             "title":  "🖥️ Bookstack_Setp9修改圖片上傳限制",
+                                             "url":  "https://wiki-js.mis4o.com/zh-tw/02-infra/server/Bookstack_Setp9修改圖片上傳限制"
+                                         },
+                                         {
+                                             "title":  "🖥️ Bookstack_Step11解除BookStack的多重身分驗證（Two-FactorAuthentication,2FA）",
+                                             "url":  "https://wiki-js.mis4o.com/zh-tw/02-infra/server/Bookstack_Step11解除BookStack的多重身分驗證（Two-FactorAuthentication,2FA）"
+                                         },
+                                         {
+                                             "title":  "🖥️ Bookstack_Step1LEMP",
+                                             "url":  "https://wiki-js.mis4o.com/zh-tw/02-infra/server/Bookstack_Step1LEMP"
+                                         },
+                                         {
+                                             "title":  "🖥️ 登入 Mysql",
+                                             "url":  "https://wiki-js.mis4o.com/zh-tw/02-infra/server/Bookstack_Step2MariaDBServer"
+                                         },
+                                         {
+                                             "title":  "🖥️ 下載套件",
+                                             "url":  "https://wiki-js.mis4o.com/zh-tw/02-infra/server/Bookstack_Step3InstallBookStack"
+                                         },
+                                         {
+                                             "title":  "🖥️ 設定 Bookstack.conf",
+                                             "url":  "https://wiki-js.mis4o.com/zh-tw/02-infra/server/Bookstack_Step4ConfigureNginx"
+                                         },
+                                         {
+                                             "title":  "🖥️ 設定寄件者顯示名稱",
+                                             "url":  "https://wiki-js.mis4o.com/zh-tw/02-infra/server/Bookstack_Step5BookStackSMTP設定"
+                                         },
+                                         {
+                                             "title":  "🖥️ 1 - .env - 設定檔",
+                                             "url":  "https://wiki-js.mis4o.com/zh-tw/02-infra/server/Bookstack_Step6備份與還原"
+                                         },
+                                         {
+                                             "title":  "🖥️ 新增資目錄",
+                                             "url":  "https://wiki-js.mis4o.com/zh-tw/02-infra/server/Bookstack_Step7設定中文字型"
+                                         },
+                                         {
+                                             "title":  "🖥️ 查詢 dpkg 安裝路徑",
+                                             "url":  "https://wiki-js.mis4o.com/zh-tw/02-infra/server/Bookstack_Step8匯出PDF"
+                                         },
+                                         {
+                                             "title":  "🖥️ Joplin_自建JoplinServerdockeronSynology_v1",
+                                             "url":  "https://wiki-js.mis4o.com/zh-tw/02-infra/server/Joplin_自建JoplinServerdockeronSynology_v1"
+                                         },
+                                         {
+                                             "title":  "🖥️ Linux_Nginx反向代理",
+                                             "url":  "https://wiki-js.mis4o.com/zh-tw/02-infra/server/Linux_Nginx反向代理"
+                                         },
+                                         {
+                                             "title":  "🖥️ Linux_SSH服務無法啟用時",
+                                             "url":  "https://wiki-js.mis4o.com/zh-tw/02-infra/server/Linux_SSH服務無法啟用時"
+                                         }
+                                     ]
+                       }
+                   ]
+}
