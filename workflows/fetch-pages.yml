@@ -1,0 +1,30 @@
+name: Fetch Wiki.js Pages
+
+on:
+  schedule:
+    - cron: '0 * * * *'   # 每小時自動執行一次
+  workflow_dispatch:        # 也可以手動觸發
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Fetch pages from Wiki.js
+        env:
+          WIKIJS_TOKEN: ${{ secrets.WIKIJS_TOKEN }}
+        run: |
+          curl -s -X POST https://wiki-js.mis4o.com/graphql \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer $WIKIJS_TOKEN" \
+            -d '{"query":"{ pages { list(orderBy: UPDATED, orderByDirection: DESC) { id path title updatedAt } } }"}' \
+            > data/pages.json
+
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git add data/pages.json
+          git diff --staged --quiet || git commit -m "Auto: update pages list"
+          git push
