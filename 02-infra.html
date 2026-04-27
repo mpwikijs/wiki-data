@@ -8,6 +8,7 @@
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { font-family: 'Noto Sans TC', 'Microsoft JhengHei', sans-serif; background: #f0f2f5; color: #2c3e50; }
+
   .header-banner {
     background: linear-gradient(135deg, #1a2535 0%, #2c3e50 60%, #1a3040 100%);
     color: white; padding: 36px 28px; text-align: center;
@@ -15,37 +16,76 @@
   }
   .header-banner::before {
     content: ''; position: absolute; top: -40px; right: -40px;
-    width: 180px; height: 180px; border-radius: 50%; background: rgba(41,128,185,0.12);
+    width: 180px; height: 180px; border-radius: 50%;
+    background: rgba(41,128,185,0.12);
   }
   .header-banner h1 { font-size: 1.7rem; font-weight: 700; position: relative; z-index: 1; }
   .header-banner p { margin-top: 8px; opacity: 0.8; font-size: 0.92rem; position: relative; z-index: 1; }
+
   .container { max-width: 880px; margin: 0 auto; padding: 24px 20px 40px; }
   .breadcrumb { font-size: 0.8rem; color: #95a5a6; margin-bottom: 20px; }
   .section-label { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #95a5a6; margin-bottom: 14px; }
+
+  /* 分類卡片 */
   .group-block { background: white; border-radius: 10px; padding: 20px; margin-bottom: 16px; box-shadow: 0 1px 6px rgba(0,0,0,0.06); border: 1px solid #e8ecef; transition: box-shadow 0.2s; }
   .group-block:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.10); }
   .group-header { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; padding-bottom: 12px; border-bottom: 1px solid #f0f2f5; }
   .group-icon { width: 36px; height: 36px; border-radius: 8px; background: linear-gradient(135deg, #2980b9, #3498db); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0; }
   .group-title { font-size: 1rem; font-weight: 700; color: #2c3e50; }
   .group-count { margin-left: auto; background: #ebf5fb; color: #2980b9; padding: 2px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: 600; }
+
+  /* 一般連結 */
   .link-list { list-style: none; }
-  .link-list li { padding: 7px 0; border-bottom: 1px dashed #eef0f2; font-size: 0.85rem; }
+  .link-list li { border-bottom: 1px dashed #eef0f2; }
   .link-list li:last-child { border-bottom: none; }
-  .link-list a { color: #2980b9; text-decoration: none; display: flex; align-items: center; gap: 6px; transition: color 0.15s; }
-  .link-list a:hover { color: #1a6fa0; }
+  .link-list a { color: #2980b9; text-decoration: none; display: flex; align-items: center; gap: 6px; padding: 7px 0; font-size: 0.85rem; transition: color 0.15s; }
+  .link-list a:hover { color: #1a5f8a; }
   .link-list a::before { content: '›'; font-size: 1rem; color: #bdc3c7; }
+
+  /* 系列折疊區塊 */
+  .series-block { border: 1px solid #e8ecef; border-radius: 8px; margin-bottom: 8px; overflow: hidden; }
+  .series-toggle {
+    display: flex; align-items: center; gap: 8px;
+    padding: 10px 14px; cursor: pointer;
+    background: #f8f9fa; border: none; width: 100%; text-align: left;
+    font-family: inherit; font-size: 0.88rem; font-weight: 600; color: #2c3e50;
+    transition: background 0.15s;
+  }
+  .series-toggle:hover { background: #f0f2f5; }
+  .series-icon { font-size: 1rem; }
+  .series-title { flex: 1; }
+  .series-badge { background: linear-gradient(135deg, #2980b9, #3498db); color: white; font-size: 0.7rem; padding: 2px 8px; border-radius: 20px; font-weight: 600; }
+  .series-arrow { font-size: 0.75rem; color: #95a5a6; transition: transform 0.2s; }
+  .series-block.open .series-arrow { transform: rotate(90deg); }
+
+  .series-steps { display: none; padding: 4px 0; border-top: 1px solid #eef0f2; }
+  .series-block.open .series-steps { display: block; }
+  .series-steps a {
+    display: flex; align-items: center; gap: 8px;
+    padding: 8px 14px 8px 36px; font-size: 0.83rem;
+    color: #2980b9; text-decoration: none;
+    border-bottom: 1px dashed #f0f2f5; transition: background 0.1s;
+  }
+  .series-steps a:last-child { border-bottom: none; }
+  .series-steps a:hover { background: #f8f9fa; color: #1a5f8a; }
+  .series-steps a::before { content: '·'; color: #bdc3c7; font-size: 1.2rem; }
+
+  /* 狀態 */
   .state-box { background: white; border-radius: 10px; padding: 48px 20px; text-align: center; color: #95a5a6; font-size: 0.9rem; box-shadow: 0 1px 6px rgba(0,0,0,0.06); }
   .spinner { width: 32px; height: 32px; border: 3px solid #eee; border-top-color: #2980b9; border-radius: 50%; animation: spin 0.8s linear infinite; margin: 0 auto 12px; }
   @keyframes spin { to { transform: rotate(360deg); } }
   .error-state { background: #fff5f5; border: 1px solid #fed7d7; border-radius: 8px; padding: 20px; color: #c53030; text-align: center; font-size: 0.88rem; }
+
   @media (max-width: 600px) { .header-banner h1 { font-size: 1.3rem; } }
 </style>
 </head>
 <body>
+
 <div class="header-banner">
   <h1>02 基礎建設 (Infrastructure)</h1>
   <p>技術文件及資源</p>
 </div>
+
 <div class="container">
   <div class="breadcrumb">🏠 首頁 / 02 基礎建設</div>
   <div class="section-label">功能分類</div>
@@ -53,8 +93,8 @@
     <div class="state-box"><div class="spinner"></div>載入中...</div>
   </div>
 </div>
+
 <script>
-  // ★ 改成你的 GitHub Pages 網址
   const DATA_URL = 'https://mpwikijs.github.io/wiki-data/data/02-infra.json';
 
   fetch(DATA_URL)
@@ -67,18 +107,48 @@
         return;
       }
       data.categories.forEach(cat => {
-        const links = cat.links.map(l =>
-          `<li><a href="${l.url}" target="_top">${l.title}</a></li>`
-        ).join('');
         const block = document.createElement('div');
         block.className = 'group-block';
-        block.innerHTML = `
+
+        const seriesItems = cat.links.filter(l => l.type === 'series');
+        const linkItems   = cat.links.filter(l => l.type === 'link');
+        const total = seriesItems.length + linkItems.length;
+
+        let innerHtml = `
           <div class="group-header">
-            <div class="group-icon">${getIcon(cat.badge)}</div>
+            <div class="group-icon">${cat.links[0]?.icon || '📁'}</div>
             <div class="group-title">${cat.name}</div>
-            <span class="group-count">${cat.links.length} 頁</span>
+            <span class="group-count">${total} 項</span>
           </div>
-          <ul class="link-list">${links}</ul>`;
+          <ul class="link-list">`;
+
+        // 系列區塊
+        seriesItems.forEach((s, idx) => {
+          const id = 'series-' + cat.name + '-' + idx;
+          const stepsHtml = s.steps.map(step =>
+            `<a href="${step.url}" target="_top">${step.title}</a>`
+          ).join('');
+          innerHtml += `
+            </ul>
+            <div class="series-block" id="${id}">
+              <button class="series-toggle" onclick="toggleSeries('${id}')">
+                <span class="series-icon">${s.icon || '📚'}</span>
+                <span class="series-title">${s.seriesTitle}</span>
+                <span class="series-badge">${s.steps.length} 篇</span>
+                <span class="series-arrow">▶</span>
+              </button>
+              <div class="series-steps">${stepsHtml}</div>
+            </div>
+            <ul class="link-list">`;
+        });
+
+        // 一般連結
+        linkItems.forEach(l => {
+          innerHtml += `<li><a href="${l.url}" target="_top">${l.title}</a></li>`;
+        });
+
+        innerHtml += `</ul>`;
+        block.innerHTML = innerHtml;
         content.appendChild(block);
       });
     })
@@ -87,9 +157,9 @@
         `<div class="error-state">⚠️ 資料載入失敗<br><small>${err.message}</small></div>`;
     });
 
-  function getIcon(badge) {
-    const map = { Server:'🖥️', Network:'🌐', Virtualization:'☁️', Monitoring:'📊' };
-    return map[badge] || '📁';
+  function toggleSeries(id) {
+    const block = document.getElementById(id);
+    block.classList.toggle('open');
   }
 </script>
 </body>
