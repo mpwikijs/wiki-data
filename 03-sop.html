@@ -106,49 +106,57 @@
         content.innerHTML = '<div class="state-box">此分類下目前沒有任何頁面。</div>';
         return;
       }
+
       data.categories.forEach(cat => {
         const block = document.createElement('div');
         block.className = 'group-block';
 
-        const seriesItems = cat.links.filter(l => l.type === 'series');
-        const linkItems   = cat.links.filter(l => l.type === 'link');
+        const seriesItems = (cat.links || []).filter(l => l.type === 'series');
+        const linkItems   = (cat.links || []).filter(l => l.type === 'link');
         const total = seriesItems.length + linkItems.length;
 
-        let innerHtml = `
-          <div class="group-header">
-            <div class="group-icon">${cat.links[0]?.icon || '📁'}</div>
-            <div class="group-title">${cat.name}</div>
-            <span class="group-count">${total} 項</span>
-          </div>
-          <ul class="link-list">`;
+        // 取分類圖示：優先從系列取，其次從普通連結取
+        let catIcon = '📁';
+        if (seriesItems.length > 0 && seriesItems[0].icon) catIcon = seriesItems[0].icon;
+        else if (linkItems.length > 0) {
+          const m = linkItems[0].title.match(/^(\S+)\s/);
+          if (m) catIcon = m[1];
+        }
 
-        // 系列區塊
+        // 標頭
+        let html = `<div class="group-header">
+          <div class="group-icon">${catIcon}</div>
+          <div class="group-title">${cat.name}</div>
+          <span class="group-count">${total} 項</span>
+        </div>`;
+
+        // 系列折疊區塊
         seriesItems.forEach((s, idx) => {
-          const id = 'series-' + cat.name + '-' + idx;
-          const stepsHtml = s.steps.map(step =>
+          const id = 's_' + cat.name.replace(/\s/g,'') + '_' + idx;
+          const stepsHtml = (s.steps || []).map(step =>
             `<a href="${step.url}" target="_top">${step.title}</a>`
           ).join('');
-          innerHtml += `
-            </ul>
-            <div class="series-block" id="${id}">
-              <button class="series-toggle" onclick="toggleSeries('${id}')">
-                <span class="series-icon">${s.icon || '📚'}</span>
-                <span class="series-title">${s.seriesTitle}</span>
-                <span class="series-badge">${s.steps.length} 篇</span>
-                <span class="series-arrow">▶</span>
-              </button>
-              <div class="series-steps">${stepsHtml}</div>
-            </div>
-            <ul class="link-list">`;
+          html += `<div class="series-block" id="${id}">
+            <button class="series-toggle" onclick="toggleSeries('${id}')">
+              <span class="series-icon">${s.icon || '📚'}</span>
+              <span class="series-title">${s.seriesTitle}</span>
+              <span class="series-badge">${(s.steps||[]).length} 篇</span>
+              <span class="series-arrow">▶</span>
+            </button>
+            <div class="series-steps">${stepsHtml}</div>
+          </div>`;
         });
 
         // 一般連結
-        linkItems.forEach(l => {
-          innerHtml += `<li><a href="${l.url}" target="_top">${l.title}</a></li>`;
-        });
+        if (linkItems.length > 0) {
+          html += '<ul class="link-list">';
+          linkItems.forEach(l => {
+            html += `<li><a href="${l.url}" target="_top">${l.title}</a></li>`;
+          });
+          html += '</ul>';
+        }
 
-        innerHtml += `</ul>`;
-        block.innerHTML = innerHtml;
+        block.innerHTML = html;
         content.appendChild(block);
       });
     })
@@ -158,8 +166,7 @@
     });
 
   function toggleSeries(id) {
-    const block = document.getElementById(id);
-    block.classList.toggle('open');
+    document.getElementById(id).classList.toggle('open');
   }
 </script>
 </body>
