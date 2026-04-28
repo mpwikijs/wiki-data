@@ -22,7 +22,9 @@
       "badge": "Resources",
       "links": [
         {"title": "🔧 庫存管理系統", "url": "https://inv.m7r.tw/"},
-        {"title": "🔧 DMS-PROD", "url": "https://folder.mis4o.com/"}
+        {"title": "🔧 DMS-PROD", "url": "https://folder.mis4o.com/"},
+        {"title": "🔧 OCS", "url": "https://ocs.mis4o.com/ocsreports/"},
+        {"title": "🔧 graylog", "url": "https://graylog.mis4o.com/"}
       ]
     }
   ]
