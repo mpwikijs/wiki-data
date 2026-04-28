@@ -134,7 +134,7 @@
         seriesItems.forEach((s, idx) => {
           const id = 's_' + cat.name.replace(/\s/g,'') + '_' + idx;
           const stepsHtml = (s.steps || []).map(step =>
-            `<a href="${step.url}" target="_top">${step.title}</a>`
+            `<a href="${step.url}" target="_blank">${step.title}</a>`
           ).join('');
           html += `<div class="series-block" id="${id}">
             <button class="series-toggle" onclick="toggleSeries('${id}')">
