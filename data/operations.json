@@ -10,12 +10,12 @@
     {
       "name": "教育訓練",
       "badge": "Training",
-      "links": [{"title": "📖 內部技術分享紀錄", "url": "#"}]
+      "links": [{"title": "📖 內部技術分享紀錄", "url": "https://wiki-js.mis4o.com/zh-tw/01-operations/meetings"}]
     },
     {
-      "name": "行政共識",
+      "name": "線上表單",
       "badge": "Consensus",
-      "links": [{"title": "📜 差旅與公出報支規範", "url": "https://expense.mis4o.com"}]
+      "links": [{"title": "📜 差旅申請單", "url": "https://expense.mis4o.com"}]
     },
     {
       "name": "員工福利",
