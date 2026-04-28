@@ -20,8 +20,10 @@
     {
       "name": "公司內部系統",
       "badge": "Resources",
-      "links": [{"title": "🔧 庫存管理系統", "url": "https://inv.m7r.tw/"}]
-      "links": [{"title": "🔧 DMS-PROD", "url": "https://folder.mis4o.com/"}]
+      "links": [
+        {"title": "🔧 庫存管理系統", "url": "https://inv.m7r.tw/"},
+        {"title": "🔧 DMS-PROD", "url": "https://folder.mis4o.com/"}
+      ]
     }
   ]
 }
