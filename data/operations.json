@@ -18,9 +18,10 @@
       "links": [{"title": "📜 差旅申請單", "url": "https://expense.mis4o.com"}]
     },
     {
-      "name": "員工福利",
+      "name": "公司內部系統",
       "badge": "Resources",
-      "links": [{"title": "🎁 員工福利與健檢說明", "url": "#"}]
+      "links": [{"title": "🔧 庫存管理系統", "url": "https://inv.m7r.tw/"}]
+      "links": [{"title": "🔧 DMS-PROD", "url": "https://folder.mis4o.com/"}]
     }
   ]
 }
